@@ -40,7 +40,9 @@ class Block {
             // Save in auxiliary variable the current block hash
             const currentHash = self.hash                            
             // Recalculate the hash of the Block
-            const newHash = SHA256(JSON.stringify(self)).toString()
+            self.hash = null
+            const newHash = await SHA256(JSON.stringify(self)).toString()
+            self.hash = currentHash
             // Comparing if the hashes changed
             if(newHash === currentHash) {
                 resolve(true)// Returning the Block is valid
@@ -70,6 +72,7 @@ class Block {
                 let decode = JSON.parse(hex2ascii(blockData))
                 resolve(decode)
             }
+            reject('Error on getting starts by address')
         })
 
         // Resolve with the data if the object isn't the Genesis block
