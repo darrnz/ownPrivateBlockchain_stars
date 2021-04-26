@@ -44,7 +44,7 @@ class Blockchain {
      * Utility method that return a Promise that will resolve with the height of the chain
      */
     getChainHeight() {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             resolve(this.height);
         });
     }
@@ -200,7 +200,6 @@ class Blockchain {
      * 2. Each Block should check the with the previousBlockHash
      */
     validateChain() {
-        let self = this;
         let errorLog = [];
         return new Promise(async (resolve, reject) => {
             this.chain.map(async(e,i,arr) => {
